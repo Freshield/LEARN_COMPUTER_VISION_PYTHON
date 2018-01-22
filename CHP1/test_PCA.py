@@ -26,23 +26,38 @@ def pca(X):
 
     return V,S,mean_X
 
-data_path = '/media/freshield/COASAIR/LEARN_COMPUTER_VISION_PYTHON/example/data/a_thumbs/'
-imlist = get_imlist(data_path)
+def test_pca():
+    data_path = '/media/freshield/COASAIR/LEARN_COMPUTER_VISION_PYTHON/example/data/a_thumbs/'
+    imlist = get_imlist(data_path)
 
-im = array(Image.open(imlist[0]))
-m,n = im.shape[0:2]
-imnbr = len(imlist)
+    im = array(Image.open(imlist[0]))
+    m,n = im.shape[0:2]
+    imnbr = len(imlist)
 
-immatrix = array([array(Image.open(im)).flatten() for im in imlist], 'f')
+    immatrix = array([array(Image.open(im)).flatten() for im in imlist], 'f')
 
-V,S,immean = pca(immatrix)
+    V,S,immean = pca(immatrix)
 
-figure()
-gray()
-subplot(2,4,1)
-imshow(immean.reshape(m,n))
-for i in range(7):
-    subplot(2,4,i+2)
-    imshow(V[i].reshape(m,n))
+    return V,S,immean
 
-show()
+def test_show_pca():
+    data_path = '/media/freshield/COASAIR/LEARN_COMPUTER_VISION_PYTHON/example/data/a_thumbs/'
+    imlist = get_imlist(data_path)
+
+    im = array(Image.open(imlist[0]))
+    m,n = im.shape[0:2]
+    imnbr = len(imlist)
+
+    immatrix = array([array(Image.open(im)).flatten() for im in imlist], 'f')
+
+    V,S,immean = pca(immatrix)
+
+    figure()
+    gray()
+    subplot(2,4,1)
+    imshow(immean.reshape(m,n))
+    for i in range(7):
+        subplot(2,4,i+2)
+        imshow(V[i].reshape(m,n))
+
+    show()
