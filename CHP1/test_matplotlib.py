@@ -7,13 +7,24 @@ data_path = '../example/data/'
 im = array(Image.open(data_path + 'empire.jpg'))
 
 def test0():
-    # evenly sampled time at 200ms intervals
-    t = np.arange(0., 5., 0.2)
+    # Fixing random state for reproducibility
+    np.random.seed(19680801)
 
-    # red dashes, blue squares and green triangles
-    plot(t, t, 'r--', t, t ** 2, 'bs', t, t ** 3, 'g^')
+    mu, sigma = 100, 15
+    x = mu + sigma * np.random.randn(10000)
 
-    show()
+    # the histogram of the data
+    n, bins, patches = plt.hist(x, 50, normed=1, facecolor='g', alpha=0.75)
+
+    plt.xlabel('Smarts')
+    plt.ylabel('Probability')
+    plt.title('Histogram of IQ')
+    plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+    plt.axis([40, 160, 0, 0.03])
+    plt.grid(True)
+    plt.title(r'$\sigma_i=15$')
+    plt.show()
+
 
 
 def test1():
