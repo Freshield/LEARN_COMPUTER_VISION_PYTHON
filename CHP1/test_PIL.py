@@ -21,4 +21,3 @@ def test2():
     except IOError:
         print'cannot convert', infile
 
-test2()
