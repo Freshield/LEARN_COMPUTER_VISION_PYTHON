@@ -10,3 +10,7 @@
 *.npy
 *.txt
 *.csv
+*.bmp
+*.JPG
+*.ppm
+*.xml
