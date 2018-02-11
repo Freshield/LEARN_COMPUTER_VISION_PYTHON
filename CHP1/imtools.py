@@ -12,7 +12,12 @@ def get_imlist(path):
 def imresize(im, sz):
     pil_im = Image.fromarray(uint8(im))
 
-    return array(pil_im.resize(sz))
+    try:
+        pil_im = pil_im.resize(sz)
+    except:
+        print 'The resize same meet some problem...'
+
+    return array(pil_im)
 
 def histeq(im, nbr_bins=256):
 
@@ -22,3 +27,23 @@ def histeq(im, nbr_bins=256):
 
     im2 = interp(im.flatten(), bins[:-1], cdf)
     return im2.reshape(im.shape), cdf
+
+def compute_average(imlist):
+
+    averageim = array(Image.open(imlist[0]), 'f')
+    sz = Image.open(imlist[0]).size
+    print sz
+
+    for imname in imlist[1:]:
+        try:
+            im_tmp = array(Image.open(imname))
+            im_resize = imresize(im_tmp, sz)
+            print im_resize.shape
+            averageim += im_resize
+        except:
+            print imname + '...skipped'
+
+
+    averageim /= len(imlist)
+
+    return array(averageim, 'uint8')

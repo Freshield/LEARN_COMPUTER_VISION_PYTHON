@@ -74,6 +74,17 @@ def test3():
 
     show()
 
+def test4():
+    imlist = imtools.get_imlist(data_path)
 
-test3()
+    averageim = imtools.compute_average(imlist)
+
+    figure()
+
+    imshow(averageim)
+
+    show()
+
+
+test4()
 
