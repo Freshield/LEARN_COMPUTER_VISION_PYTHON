@@ -1,6 +1,7 @@
 import numpy as np
 from pylab import *
 from PIL import Image
+import imtools
 
 data_path = '../example/data/'
 
@@ -47,5 +48,32 @@ def test2():
 
     show()
 
-test2()
+def test3():
+    im = array(Image.open(data_path + 'AquaTermi_lowcontrast.JPG').convert('L'))
+    im2, cdf = imtools.histeq(im)
+
+    figure()
+
+    subplot(321)
+    hist(im.flatten(), 128)
+
+    subplot(322)
+    hist(im2.flatten(), 128)
+
+    subplot(323)
+    imshow(im)
+    gray()
+
+    subplot(324)
+    imshow(im2)
+    gray()
+
+    print cdf.shape
+    subplot(325)
+    plot(cdf)
+
+    show()
+
+
+test3()
 
